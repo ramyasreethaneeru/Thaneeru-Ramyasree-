@@ -1,0 +1,29 @@
+<!-- views/post.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Post</title>
+    <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+    <div class="container">
+        <div id="post"></div>
+        <a href="/" class="button">Back to Home</a>
+    </div>
+
+    <script>
+        const postId = window.location.pathname.split('/').pop();
+        fetch(`/posts/${postId}`)
+            .then(response => response.json())
+            .then(post => {
+                const postContainer = document.getElementById('post');
+                postContainer.innerHTML = `
+                    <h1>${post.title}</h1>
+                    <p>${post.content}</p>
+                `;
+            });
+    </script>
+</body>
+</html>
